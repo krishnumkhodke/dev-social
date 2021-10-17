@@ -1,0 +1,50 @@
+{% extends 'projects/base.html' %}
+{% load static %}
+{% block content %}
+
+<style type="text/css">
+  .p1 {
+  padding-top: 25%;
+}
+</style>
+<div class = "p1" >
+          <!-- Input:Text -->
+    <div class="auth">
+      <div class="card">
+        <div class="auth__header text-center">
+          <h3>Account Update</h3>
+        
+        </div>
+
+        <form action="" method="POST" class="form auth__form" enctype="multipart/form-data">
+          <!-- Input:Email -->
+          {% csrf_token %}
+            {% for field in form %}
+
+          <div class="form__field">
+            <label for="formInput#text"> {{ field.label }} </label>
+            {{ field }}
+            <br>
+            {% if field.help_text %}
+              <small>{{ field.help_text }}</small>
+            {% endif %}
+            <br>
+            {% for er in field.errors %}
+              <bold style = "color: red;">{{ er }}</bold>
+            {% endfor %}
+          </div>
+
+          {% endfor %}
+          <div class="auth__actions">
+            <input class="btn btn--sub btn--lg" type="submit" value="Log In" />
+            <a href="forgetpassword.html">Forget Password?</a>
+          </div>
+        </form>
+       
+      </div>
+    </div>
+
+
+</div>        
+
+{% endblock %}

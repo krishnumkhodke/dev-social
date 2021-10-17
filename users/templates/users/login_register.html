@@ -1,0 +1,105 @@
+{% extends 'projects/base.html' %}
+{% load static %}
+{% block content %}
+	{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+	{% if page == 'login' %}
+	<div class="auth">
+      <div class="card">
+        <div class="auth__header text-center">
+          <a href="/">
+            <img src="{% static 'images/profiles/default_profile.png' %}" alt="icon" class="avatar avatar--xl" />
+          </a>
+          <h3>Account Login</h3>
+          <p>Hello Developer, Welcome Back!</p>
+        </div>
+
+        <form action="" method="POST" class="form auth__form">
+          <!-- Input:Email -->
+          {% csrf_token %}
+          <div class="form__field">
+            <label for="formInput#text">Username: </label>
+            <input
+              class="input input--text"
+              id="formInput#text"
+              type="text"
+              name="username"
+              placeholder="Enter your username..."
+            />
+          </div>
+
+          <!-- Input:Password -->
+          <div class="form__field">
+            <label for="userPassword">Password: </label>
+            <input
+              class="input input--password"
+              id="formInput#passowrd"
+              type="password"
+              name="userPassword"
+              placeholder="••••••••"
+            />
+          </div>
+          <div class="auth__actions">
+            <input class="btn btn--sub btn--lg" type="submit" value="Log In" />
+            <a href="forgetpassword.html">Forget Password?</a>
+          </div>
+        </form>
+        <div class="auth__alternative">
+          <p>Don’t have an Account?</p>
+          <a href="{% url 'RegisterUser' %}">Sign Up</a>
+        </div>
+      </div>
+    </div>
+
+	<p>Don't Have An Account ? <a href="{% url 'RegisterUser' %}">Sign Up</a></p>
+	{% else %}
+		<div>
+		</div>
+		<div class="auth">
+      <div class="card">
+        <div class="auth__header text-center">
+          
+          <h3>Account SignUp</h3>
+          <p>Create a new developer account</p>
+        </div>
+
+        <form action="#" method="POST" class="form auth__form">
+          <!-- Input:Text -->
+          {% csrf_token %}
+
+          {% for field in form %}
+
+          <div class="form__field">
+            <label for="formInput#text"> {{ field.label }} </label>
+            {{ field }}
+            <br>
+            {% if field.help_text %}
+            	<small>{{ field.help_text }}</small>
+            {% endif %}
+            <br>
+            {% for er in field.errors %}
+            	<bold style = "color: red;">{{ er }}</bold>
+            {% endfor %}
+          </div>
+
+          {% endfor %}
+          <!-- Input:Email -->
+
+          <div class="auth__actions">
+            <input class="btn btn--sub btn--lg" type="submit" value="Sign  In" />
+          </div>
+        </form>
+        <div class="auth__alternative">
+          <p>Already have an Account?</p>
+          <a href="{% url 'LoginRegister' %}">Log In</a>
+        </div>
+      </div>
+    </div>
+		
+	{% endif %}
+{% endblock %}

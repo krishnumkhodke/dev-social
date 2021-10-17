@@ -1,0 +1,11 @@
+{% extends 'projects/base.html' %}
+
+{% block content %}
+	
+	<form method='POST' enctype="multipart/form-data">
+		{% csrf_token %}
+		<a href="{% url 'Projects' %}"> Back </a>
+		<button type="submit"> Confirm </button>
+	</form>
+
+{% endblock %}

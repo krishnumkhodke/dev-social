@@ -1,0 +1,18 @@
+{% extends 'projects/base.html' %}
+{% load static %}
+{% block content %}
+  
+  {% if page == 'add' %}
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Skill</button>
+  </form>
+  {% else %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+  </form>
+  {% endif %}
+{% endblock %}
