@@ -38,7 +38,7 @@
                   <a title="Personal Website" href="#" target="_blank"><i class="im im-globe"></i></a>
                 </li>
               </ul>
-              <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+              
             </div>
           </div>
         </div>
@@ -90,8 +90,8 @@
                 </p>
               </td>
               <td class="settings__tableActions">
-                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'UpdateProject' pr.id %}"><i class="im im-edit"></i> Edit</a>
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'DeleteProject' pr.id %}"><i class="im im-x-mark-circle-o"></i>
                   Delete</a>
               </td>
             </tr>

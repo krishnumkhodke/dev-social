@@ -68,8 +68,9 @@ def registerUser(request):
 		if form.is_valid():
 			user = form.save()
 			messages.success(request, 'User Created')
+			pr = models.Profile.objects.get(user = user)
 			login(request, user)
-			return redirect('UserProfile', pk=user.id)
+			return redirect('UserAccount')
 	return render(request, 'users/login_register.html', {'page' : page, 'form' : form})
 
 def logoutUser(request):

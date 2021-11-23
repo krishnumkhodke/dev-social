@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from . import models
 from .forms import ProjectCreationForm
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -33,6 +34,7 @@ def projects(request):
 	
 	return render(request, 'projects/projects.html', {'projects':projects})
 
+@login_required(login_url='LoginRegister')
 def createProject(request):
 
 	user = request.user
@@ -47,7 +49,7 @@ def createProject(request):
 			return redirect('Projects')
 	return render(request, 'projects/create_project.html', {'form' : form})
 
-
+@login_required(login_url='LoginRegister')
 def updateProject(request, pk):
 	try:
 		project = models.Project.objects.get(title = pk)
@@ -64,9 +66,9 @@ def updateProject(request, pk):
 		form = ProjectCreationForm(instance = project)
 	return render(request, 'projects/create_project.html', {'form' : form})
 
-
+@login_required(login_url='LoginRegister')
 def deleteProject(request, pk):
-	project = models.Project.objects.get(title = pk)
+	project = models.Project.objects.get(id = pk)
 	if request.method == 'POST':
 		project.delete()
 		return redirect('Projects')
